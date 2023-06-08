@@ -9,6 +9,9 @@ on:
       - master
   workflow_dispatch:
 
+env :
+AZURE_WEBAPP_PACKAGE_PATH : '.'
+
 jobs:
   build:
     runs-on: windows-latest
@@ -52,5 +55,5 @@ jobs:
         with:
           app-name: 'tstgithubchecker'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FE8E2EA2F01493BA316EA030E725D0F }}
-          package: .
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FE8E2EA2F01493BA316EA030E725D0F }
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/test'
