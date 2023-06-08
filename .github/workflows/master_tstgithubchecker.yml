@@ -24,15 +24,16 @@ jobs:
       - name: npm install, build, and test
         run: |
           mkdir test
+          cd test
           npm install
-          npm run build --if-present > ./test
+          npm run build --if-present 
           npm run test --if-present
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./test
+          path: .
       
 
   deploy:
@@ -55,4 +56,4 @@ jobs:
           app-name: 'tstgithubchecker'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FE8E2EA2F01493BA316EA030E725D0F }}
-          package: ./test
+          package: .
